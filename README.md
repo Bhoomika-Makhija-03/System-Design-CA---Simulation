@@ -71,28 +71,10 @@ flowchart TD
 | **SSE Update Server** | Control Plane | HTTP persistent streaming gateway holding active client connections | 4,000 push/s |
 | **Monitoring** | Telemetry | Async telemetry collector tracking latency percentiles and errors | 2,000 req/s |
 
----
-
-## 4. Mathematical Queueing & Latency Simulation Model
-
-For every simulation tick $\Delta t$:
-1. **Utilization:**
-   $$U = \min\left(100,\; 100 \times \frac{L_{in}}{C}\right)$$
-   Where $L_{in}$ is incoming load and $C$ is component processing capacity.
-2. **Queue Buildup & Throughput:**
-   - If $L_{in} > C$:
-     $$\Delta Q = L_{in} - C$$
-     $$Q = \min(Q_{max},\; Q + \Delta Q)$$
-     Throughput is capped at $C$. Requests exceeding $Q_{max}$ are dropped (error rate rises).
-   - If $L_{in} \le C$:
-     Queue drains: $Q = \max(0,\; Q - (C - L_{in}))$.
-3. **Queue Delay & Latency:**
-   $$T = T_{base} + \left(\frac{Q}{C}\right) \times 1000\text{ ms} + \text{Network Delay}$$
-   $$p95 \approx T \times \left(1.35 + \frac{Q}{200}\right)$$
 
 ---
 
-## 5. Ready-To-Run College Presentation Scenarios
+## 4. Ready-To-Run College Presentation Scenarios
 
 The simulator features 4 one-click presentation scenarios:
 
@@ -118,7 +100,7 @@ The simulator features 4 one-click presentation scenarios:
 
 ---
 
-## 6. How to Run and Test
+## 5. How to Run and Test
 
 ### Development Server
 ```bash
@@ -140,7 +122,7 @@ npm run build
 
 ---
 
-## 7. UI Design Highlights
+## 6. UI Design Highlights
 - **Strict Clean Light Theme**: White and slate-50 backgrounds, subtle borders, high legibility.
 - **ShopEasy Mobile App Preview**: Realistic mobile phone preview with dynamic checkout UI reacting to `new_checkout` flag states.
 - **Interactive Architecture Canvas**: SVG visualizer with live animated pulses, health indicators, zoom & fit controls, and click-to-inspect.
